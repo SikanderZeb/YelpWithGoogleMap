@@ -37,6 +37,10 @@
                 <constraint firstItem="Jvp-Wv-ocd" firstAttribute="leading" secondItem="83O-5U-krO" secondAttribute="trailing" constant="5" id="o1d-Az-spu"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="nameLabel" destination="Jvp-Wv-ocd" id="4AT-He-vTN"/>
+                <outlet property="thumbImageView" destination="83O-5U-krO" id="2cd-8M-dOS"/>
+            </connections>
             <point key="canvasLocation" x="-37.5" y="-228"/>
         </view>
     </objects>

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Business View Controller-->
+        <!--Delegate-->
         <scene sceneID="5L9-Uz-lNK">
             <objects>
                 <viewController title="Business View Controller" id="2xI-yr-O5N" customClass="BusinessesViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
@@ -116,7 +116,6 @@
                                             <outlet property="ratingImageView" destination="T16-Rb-qh1" id="yCK-VD-1x4"/>
                                             <outlet property="reviewsCountLabel" destination="STW-Wk-hti" id="dA5-Wj-dfc"/>
                                             <outlet property="thumbImageView" destination="Adx-0u-4yq" id="bea-hn-Q25"/>
-                                            <segue destination="k7I-Co-zL6" kind="show" identifier="showDetail" id="g3w-6W-Ecc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -125,23 +124,22 @@
                                     <outlet property="delegate" destination="2xI-yr-O5N" id="S32-PW-7cA"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb3-PY-Mpj" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="202" width="375" height="465"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hp9-Rg-Wfk" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="269" width="375" height="398"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="2xI-yr-O5N" id="ZCs-8r-zyb"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="cb3-PY-Mpj" secondAttribute="bottom" id="2bA-MQ-h8X"/>
-                            <constraint firstItem="cb3-PY-Mpj" firstAttribute="centerX" secondItem="XhR-oz-92f" secondAttribute="centerX" id="9P9-PI-SJG"/>
-                            <constraint firstItem="cb3-PY-Mpj" firstAttribute="leading" secondItem="XhR-oz-92f" secondAttribute="leadingMargin" constant="-16" id="bhl-go-HMR"/>
-                            <constraint firstItem="cb3-PY-Mpj" firstAttribute="top" secondItem="hR0-74-jRp" secondAttribute="bottom" constant="138" id="sCk-6V-nUq"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Yelp" id="Fwi-Lv-oK4"/>
                     <connections>
-                        <outlet property="mapView" destination="cb3-PY-Mpj" id="n5L-fk-39H"/>
+                        <outlet property="mapView" destination="Hp9-Rg-Wfk" id="I7o-6h-XZc"/>
                         <outlet property="tableView" destination="q7K-M7-1LF" id="8He-2C-cbT"/>
+                        <segue destination="k7I-Co-zL6" kind="show" identifier="showDetail" id="LYa-sz-yxb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -153,7 +151,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zgv-gF-3Qg" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="V0I-Zv-MaE">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="V0I-Zv-MaE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.45003430529999999" blue="0.38835145809999999" alpha="1" colorSpace="calibratedRGB"/>

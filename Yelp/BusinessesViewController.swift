@@ -44,11 +44,13 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         
         Business.searchWithTerm(term: "Restaurants", sort: currentSort, categories: currentCategories, deals: currentDeal, distance: currentDistance, offset: currentOffset, completion: { (businesses: [Business]?, error: Error?) -> Void in
             self.businesses = businesses
-            print("business downloaded are : \(String(describing: businesses)) ")
+            print("business downloaded are : \(String(describing: businesses)) , error : \(String(describing: error))")
+            
+            
             self.tableView.reloadData()
             
                 if businesses != nil {
-                    
+                    //UserDefaults.standard.setValue(self.businesses, forKey: "businesses")
                     self.placePins()
                 }
 
@@ -110,6 +112,7 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "BusinessCell", for: indexPath as IndexPath) as! BusinessCell
         var business = searchActive ? searchBarFilters : businesses!
+        cell.tag = indexPath.row
         cell.business = business?[indexPath.row]
         if indexPath.row == businesses.count - 1 {
             noMoreResultLabel.isHidden ? self.loadingState.startAnimating() : self.loadingState.stopAnimating()
@@ -120,6 +123,10 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+        let index = tableView.cellForRow(at: indexPath)?.tag
+        let b:Business? = businesses[index!]
+        performSegue(withIdentifier: "showDetail", sender: b)
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -152,8 +159,11 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
     func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
     
         let infoWindow = Bundle.main.loadNibNamed("CustomInfo", owner: nil, options: nil)?.first! as! CustomInfo
+        
         let index = marker.userData as! Int
+
         infoWindow.business = businesses[index]
+        
         return infoWindow
     }
     
